@@ -5,10 +5,11 @@ import (
 	"go/types"
 	"sort"
 
+	"github.com/vektah/gqlparser/v2/ast"
+
 	"github.com/99designs/gqlgen/codegen/config"
 	"github.com/99designs/gqlgen/codegen/templates"
 	"github.com/99designs/gqlgen/plugin"
-	"github.com/vektah/gqlparser/v2/ast"
 )
 
 type BuildMutateHook = func(b *ModelBuild) *ModelBuild
@@ -162,11 +163,17 @@ func (m *Plugin) MutateConfig(cfg *config.Config) error {
 					typ = types.NewPointer(typ)
 				}
 
+				tagSuffix := ""
+
+				if cfg.OmitEmpty {
+					tagSuffix = ",omitempty"
+				}
+
 				it.Fields = append(it.Fields, &Field{
 					Name:        name,
 					Type:        typ,
 					Description: field.Description,
-					Tag:         `json:"` + field.Name + `,omitempty"`,
+					Tag : fmt.Sprintf(`json:"%s"%s`, field.Name, tagSuffix),
 				})
 			}
 

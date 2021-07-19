@@ -25,6 +25,7 @@ type Config struct {
 	AutoBind                 []string                   `yaml:"autobind"`
 	Models                   TypeMap                    `yaml:"models,omitempty"`
 	StructTag                string                     `yaml:"struct_tag,omitempty"`
+	OmitEmpty                bool                     `yaml:"omit_empty,omitempty"`
 	Directives               map[string]DirectiveConfig `yaml:"directives,omitempty"`
 	OmitSliceElementPointers bool                       `yaml:"omit_slice_element_pointers,omitempty"`
 	SkipValidation           bool                       `yaml:"skip_validation,omitempty"`
