@@ -166,7 +166,7 @@ func (m *Plugin) MutateConfig(cfg *config.Config) error {
 					Name:        name,
 					Type:        typ,
 					Description: field.Description,
-					Tag:         `json:"` + field.Name + `"`,
+					Tag:         `json:"` + field.Name + `,omitempty"`,
 				})
 			}
 
